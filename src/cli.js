@@ -9,7 +9,7 @@ program
 
 program
   .arguments('<consul-host> <service-host> <service-name> <service-tag>')
-  .option('-p, --port <port>', 'Port to query the consul host on', parseInt)
+  .option('-p, --port <port>', 'Port to query the consul host on (defaults to 8500)', parseInt)
   .action(search);
 
 if (process.argv.length <= 2) {
