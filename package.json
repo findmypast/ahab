@@ -1,0 +1,71 @@
+{
+  "name": "ahab",
+  "version": "0.1.0",
+  "description": "Hunts down docker containers registered by registrator in consul.",
+  "scripts": {
+    "test": "mocha --reporter nyan --recursive",
+    "test:ci": "mocha --reporter mocha-teamcity-reporter --recursive",
+    "prepublish-to-npm": "supersoaker squirt -r https://registry.npmjs.org",
+    "publish-to-npm": "publish",
+    "ct": "node src/cli.js"
+  },
+  "bin": {
+    "ahab": "bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/findmypast/ahab.git"
+  },
+  "keywords": [
+    "consul",
+    "registrator",
+    "docker",
+    "search"
+  ],
+  "author": "findmypast",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/findmypast/ahab/issues"
+  },
+  "homepage": "https://github.com/findmypast/ahabr#readme",
+  "dependencies": {
+    "commander": "^2.9.0",
+    "consul": "^0.25.0",
+    "lodash": "^4.11.1"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "chai-string": "^1.2.0",
+    "eslint": "^2.10.2",
+    "eslint-config-eslint": "^3.0.0",
+    "mocha": "^2.4.5",
+    "mocha-teamcity-reporter": "^1.0.0",
+    "publish": "^0.5.0",
+    "rewire": "^2.5.1",
+    "sinon": "^1.17.3",
+    "sinon-chai": "^2.8.0",
+    "supersoaker": "^1.0.1"
+  },
+  "eslintConfig": {
+    "extends": "eslint",
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "rules": {
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "indent": [
+        "error",
+        2
+      ],
+      "require-jsdoc": "off",
+      "brace-style": [
+        "error",
+        "stroustrup"
+      ]
+    }
+  }
+}
