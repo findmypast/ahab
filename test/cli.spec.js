@@ -82,3 +82,83 @@ describe('when querying for a service with multiple containers on one tag', func
     );
   });
 });
+
+describe('when querying for a service with multiple containers on one tag with multiple hosts', function() {
+  const testHost = 'test-host';
+  const testContainers = ['happy-test-container', 'another-test-container'];
+  before(function(done) {
+    mockServer(
+      [{
+        'ServiceID': `${testHost}:${testContainers[0]}:4001`
+      },
+      {
+        'ServiceID': `another-host:${testContainers[1]}:4001`
+      },
+      {
+        'ServiceID': `${testHost}:${testContainers[1]}:4001`
+      }],
+      done
+    );
+  });
+
+  it('should return the container names for the correct host', function(done) {
+    act(
+      'happy-test',
+      'test',
+      testHost,
+      (err, stdout) => {
+        expect(stdout).to.equal(testContainers.join('\n') + '\n');
+        done(err);
+      }
+    );
+  });
+});
+
+describe('when querying for a service with no containers', function() {
+  const testHost = 'test-host';
+
+  before(function(done) {
+    mockServer(
+      [],
+      done
+    );
+  });
+
+  it('should return the container names for the correct host', function(done) {
+    act(
+      'happy-test',
+      'test',
+      testHost,
+      (err, stdout) => {
+        expect(stdout).to.equal('\n');
+        done(err);
+      }
+    );
+  });
+});
+
+describe('when querying for a service and the consul API fails', function() {
+  const testHost = 'test-host';
+
+  before(function(done) {
+    const server = express();
+    server.get('/*', (req, res) => {
+      res.sendStatus(500);
+    });
+    expressServer = server.listen(mockPort, () => {
+      done();
+    });
+  });
+
+  it('should return the container names for the correct host', function(done) {
+    act(
+      'happy-test',
+      'test',
+      testHost,
+      (err) => {
+        expect(err).to.exist;
+        done();
+      }
+    );
+  });
+});

@@ -24,11 +24,12 @@ module.exports = (args) => {
     {
       service: args.service,
       tag: args.tag
-    })
-  .then((res) => {
-    console.log(getContainerNames(res, args.host).join('\n'));
-  })
-  .catch((err) => {
-    throw err;
-  });
+    },
+    (err, res) => {
+      if (err) {
+        throw err;
+      }
+
+      console.log(getContainerNames(res, args.host).join('\n'));
+    });
 };
