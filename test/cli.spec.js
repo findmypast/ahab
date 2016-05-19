@@ -124,7 +124,7 @@ describe('when querying for a service with no containers', function() {
     );
   });
 
-  it('should return the container names for the correct host', function(done) {
+  it('should return nothing', function(done) {
     act(
       'happy-test',
       'test',
@@ -150,7 +150,7 @@ describe('when querying for a service and the consul API fails', function() {
     });
   });
 
-  it('should return the container names for the correct host', function(done) {
+  it('should throw an error', function(done) {
     act(
       'happy-test',
       'test',
