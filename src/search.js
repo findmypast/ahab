@@ -9,27 +9,23 @@ function getContainerNames(result, host) {
   return _.map(filtered, f => f[1]);
 }
 
-module.exports = (args) => {
-  const consulHostParts = args.consul.split(':');
-  const consulHost = consulHostParts[0];
-  const consulPort = consulHostParts[1];
-
+module.exports = (consulHost, serviceHost, serviceName, serviceTag, options) => {
   const consul = require('consul')({
     host: consulHost,
-    port: consulPort,
+    port: options.port,
     promisify: true
   });
 
   return consul.catalog.service.nodes(
     {
-      service: args.service,
-      tag: args.tag
+      service: serviceName,
+      tag: serviceTag
     },
     (err, res) => {
       if (err) {
         throw err;
       }
 
-      console.log(getContainerNames(res, args.host).join('\n'));
+      console.log(getContainerNames(res, serviceHost).join('\n'));
     });
 };

@@ -21,7 +21,7 @@ function mockServer(response, done) {
 
 function act(service, tag, dockerHost, done) {
   exec(
-    `node src/cli.js --consul localhost:${mockPort} --service ${service} --tag ${tag} --host ${dockerHost}`,
+    `node src/cli.js -p ${mockPort} localhost ${dockerHost} ${service} ${tag}`,
     done
   );
 }
