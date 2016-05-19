@@ -8,10 +8,12 @@ program
   .version(version);
 
 program
-  .option('-s, --service <name>', 'The name of the service to search for.')
-  .option('-t, --tag <tag>', 'The tag of the service to search for.')
-  .option('-h, --host <hostname>', 'The hostname of the docker host which hosts the service.')
-  .option('-c, --consul <hostname:port>', 'The hostname and port of the consul server to search.')
-  .parse(process.argv);
+  .arguments('<consul-host> <service-host> <service-name> <service-tag>')
+  .option('-p, --port <port>', 'Port to query the consul host on (defaults to 8500)', parseInt)
+  .action(search);
 
-search(program);
+if (process.argv.length <= 2) {
+  program.help();
+}
+
+program.parse(process.argv);
