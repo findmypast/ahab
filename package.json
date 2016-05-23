@@ -1,6 +1,6 @@
 {
   "name": "ahab",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Hunts down docker containers registered by registrator in consul.",
   "scripts": {
     "test": "mocha --reporter nyan --recursive",
