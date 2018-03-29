@@ -22,7 +22,7 @@
     "docker",
     "search"
   ],
-  "author": "findmypast",
+  "author": "Findmypast <oss@findmypast.com> tech.findmypast.com",
   "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/findmypast/ahab/issues"
